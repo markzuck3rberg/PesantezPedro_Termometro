@@ -1,0 +1,82 @@
+ion-content {
+  --ion-background-color: #101010;
+}
+
+ion-range {
+  --bar-background: #f2f9ff;
+  --bar-background-active: #ffbc74;
+  --bar-height: 8px;
+  --bar-border-radius: 8px;
+  --knob-background: red;
+  --knob-size: 40px;
+  --pin-background: #ff8f49;
+  --pin-color: #fff;
+}
+
+.thermometer {
+  width: 40px; 
+  height: 280px; 
+  background-color: #ccc;
+  position: relative;
+  margin: 20px auto;
+  transition: height 0.5s ease; 
+  display: flex;
+  align-items: flex-end;
+  border-radius: 25px;
+  border: 10px solid #ccc; 
+  
+}
+
+
+.animate .mercury {
+  transition: height 0.5s ease; 
+}
+
+.mercury {
+  width: 100%;
+  background-color: red;
+  border-radius: 25px;
+  z-index: 1;
+}
+
+.bulb {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #ff0000;
+  position: absolute;
+  bottom: calc(1% - 30px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  top:98%;
+}
+.bulb-contorno {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background-color: #ccc;
+  position: absolute;
+  bottom: calc(1% - 30px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  top:93%;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+.controls {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#temperatureDisplay {
+  font-size: 18px;
+  margin-left: 10px;
+}
+.styleWord{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color:#ffffff
+}
