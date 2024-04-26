@@ -1,17 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Database, object, ref, onValue, Unsubscribe, set } from '@angular/fire/database';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit, OnDestroy{
   temperature: number = 0;
   mercuryHeight: string = '0%';
   animate: boolean = false;
 
-  constructor() {
+  firebaseSubscription: Unsubscribe | null = null;
+
+  constructor(private database: Database) {
     this.updateMercuryHeight();
+  }
+
+  ngOnDestroy(): void {
+    if (this.firebaseSubscription) {
+      this.firebaseSubscription = null; // Cancelar la suscripción asignando null
+    }
+  }
+
+  ngOnInit(): void {
+    const route = ref(this.database, "/Intensidad");
+    // Llama a set y maneja la promesa
+    set(route, this.temperature)
+      .then(() => console.log('Temperature set successfully to Firebase'))
+      .catch(error => console.error('Error setting temperature to Firebase:', error));
   }
 
   updateTemperature(event: any) {
@@ -21,6 +38,12 @@ export class HomePage {
     setTimeout(() => {
       this.animate = false;
     }, 500);
+
+    // Update Firebase database
+    const route = ref(this.database, "/Intensidad");
+    set(route, this.temperature)
+      .then(() => console.log('Temperature updated successfully to Firebase'))
+      .catch(error => console.error('Error updating temperature to Firebase:', error));
   }
 
   updateMercuryHeight() {
@@ -71,6 +94,8 @@ export class HomePage {
     const hex = c.toString(16);
     return hex.length === 1 ? '0' + hex : hex;
   }
+
+  
 }
 
 
